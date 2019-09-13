@@ -43,7 +43,7 @@ public class SuiteConfiguration {
         capabilities.setCapability(name, value);
       }
     }
-
+    System.out.println(capabilitiesFile+" capabilitiesFile");
     return capabilities;
   }
 

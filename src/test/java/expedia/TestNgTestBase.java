@@ -3,6 +3,7 @@ package expedia;
 import java.io.IOException;
 import java.net.URL;
 
+import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Capabilities;
 
@@ -27,15 +28,23 @@ public class TestNgTestBase {
   public void initTestSuite() throws IOException {
     SuiteConfiguration config = new SuiteConfiguration();
     baseUrl = config.getProperty("site.url");
-    if (config.hasProperty("grid.url") && !"".equals(config.getProperty("grid.url"))) {
-      gridHubUrl = new URL(config.getProperty("grid.url"));
+      if (config.hasProperty("grid.url") && !"".equals(config.getProperty("grid.url"))) {
+        gridHubUrl = new URL(config.getProperty("grid.url"));
     }
     capabilities = config.getCapabilities();
   }
 
-  @BeforeMethod
+
+
+  @BeforeSuite
   public void initWebDriver() {
     driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities);
+  }
+
+  @BeforeSuite(dependsOnMethods = {"initTestSuite","initWebDriver"})
+  public void disableImplicitWait(){
+    System.out.println("disableImplicitWait");
+    driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
   }
 
   @AfterSuite(alwaysRun = true)
