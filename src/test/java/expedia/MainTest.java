@@ -31,11 +31,14 @@ public class MainTest extends TestNgTestBase {
   @Test(dataProvider = "roundTrip")
   public void checkPrice(String from, String to, String dataDepart, String dataReturn, int adults) {
 System.out.println(from+to+dataDepart+dataReturn+adults);
+    System.out.println(homepage.url);
 
-    driver.get(baseUrl);
-    homepage.buttonFlights.click();
-    homepage.inputFlyingFrom.sendKeys("Heathrow");
-    homepage.inputFlyingFrom.sendKeys("Dublin");
+    homepage.openPage();
+
+
+    //homepage.buttonFlights.click();
+   // homepage.fillOutFlyingFrom(from);
+   // homepage.inputFlyingFrom.sendKeys("Dublin");
     //driver.sendKeys("Heathrow");
     //Assert.assertFalse("".equals(homepage.header.getText()));
   }

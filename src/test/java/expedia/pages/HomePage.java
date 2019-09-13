@@ -10,6 +10,7 @@ import org.openqa.selenium.support.How;
  * Sample page
  */
 public class HomePage extends Page {
+static public String url="https://www.expedia.com/";
 
   @FindBy(id="flight-origin-hp-flight")
   @CacheLookup
@@ -21,49 +22,41 @@ public class HomePage extends Page {
 
   @FindBy(id="flight-departing-hp-flight")
   @CacheLookup
-  public WebElement inputDeparting;
+  public WebElement inputDataDeparting;
 
   @FindBy(id="flight-returning-hp-flight")
   @CacheLookup
-  public WebElement inputReturning;
+  public WebElement inputDataReturning;
 
   @FindBy(id="traveler-selector-hp-flight")
   @CacheLookup
   public WebElement inputTravelers;
 
+  @FindBy(xpath = "//*[text()=\"Search\"]")
+  @CacheLookup
+  public WebElement buttonSearch;
 
   @FindBy(id = "tab-flight-tab-hp")
   public WebElement buttonFlights;
 
-
-
-
-/*
-  @FindBy(how = How.TAG_NAME, using = "h1")
-  @CacheLookup
-  public WebElement inputFlyingTo;
-
-  @FindBy(how = How.TAG_NAME, using = "h1")
-  @CacheLookup
-  public WebElement inputDeparting;
-
-  @FindBy(how = How.TAG_NAME, using = "h1")
-  @CacheLookup
-  public WebElement inputReturning;
-
-  @FindBy(how = How.TAG_NAME, using = "h1")
-  @CacheLookup
-  public WebElement inputTravelers;
-
-  @FindBy(how = How.TAG_NAME, using = "h1")
-  @CacheLookup
-  public WebElement buttonSearch;
-
-  @FindBy(how = How.TAG_NAME, using = "h1")
-  @CacheLookup
-  public WebElement buttonFlights;*/
-
   public HomePage(WebDriver webDriver) {
     super(webDriver);
+    this.url=url;
+  }
+
+  public boolean fillOutFlyingFrom(String text){
+    return super.fillOutInput(this.inputFlyingFrom,20,text);
+  }
+
+  public boolean fillOutFlyingTo(String text){
+    return super.fillOutInput(this.inputFlyingTo,20,text);
+  }
+
+  public boolean fillOutDataDeparture(String text){
+    return super.fillOutInput(this.inputDataDeparting,20,text);
+  }
+
+  public boolean fillOutDataReturning(String text){
+    return super.fillOutInput(this.inputDataReturning,20,text);
   }
 }
